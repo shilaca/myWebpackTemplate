@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
     "target": "es5",
     "module": "es2015",
+    "moduleResolution": "node",
     "strict": true,
     "removeComments": true,
     "sourceMap": true,
@@ -10,5 +10,5 @@
   },
   "files": ["shader.d.ts"],
   "include": ["./src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
