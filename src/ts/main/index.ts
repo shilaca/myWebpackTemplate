@@ -1,7 +1,9 @@
-import '../scss/style.scss'
+import '../../scss/style.scss'
 
-import VertexShader from '../shader/main.vert'
-import FragmentShader from '../shader/main.frag'
+import VertexShader from '../../shader/main.vert'
+import FragmentShader from '../../shader/main.frag'
+
+import Worker from '../dedicated-worker/index.worker'
 
 console.log('hello, world!')
 console.log('vertex shader: ', VertexShader)
@@ -12,3 +14,6 @@ echo('hello')
 
 const numbers: number[] = [1, 2, 3, 4, 5]
 numbers.forEach(num => console.log(num))
+
+const worker = new Worker()
+worker.postMessage('hello, worker.')
