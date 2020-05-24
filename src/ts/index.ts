@@ -1,9 +1,9 @@
-import '../../scss/style.scss'
+import './../scss/style.scss'
 
-import VertexShader from '../../shader/main.vert'
-import FragmentShader from '../../shader/main.frag'
+import VertexShader from './../shader/main.vert'
+import FragmentShader from './../shader/main.frag'
 
-import Worker from '../dedicated-worker/index.worker'
+import Worker from './dedicated-worker/index.worker'
 
 console.log('hello, world!')
 console.log('vertex shader: ', VertexShader)

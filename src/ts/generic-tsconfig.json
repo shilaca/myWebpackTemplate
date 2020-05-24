@@ -6,6 +6,8 @@
     "strict": true,
     "removeComments": true,
     "sourceMap": true,
+    "declarationMap": false,
+    "declarationDir": "./types",
     "composite": true,
     "rootDir": "./"
   },

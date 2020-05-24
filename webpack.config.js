@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -9,15 +10,15 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 module.exports = (env, argv) => {
   const IS_DEV = argv.mode === 'development'
   return {
-    entry: './src/ts/main/index.ts',
+    entry: './src/ts/index.ts',
     output: {
-      filename: './js/main-[hash].js',
+      filename: './scripts/main-[hash].js',
       path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
       minimizer: [new TerserPlugin({}), new OptimizeCssAssetsPlugin({})],
     },
-    devtool: 'source-map',
+    devtool: IS_DEV ? 'source-map' : '',
     devServer: {
       contentBase: path.resolve(__dirname, 'dist'),
       watchContentBase: true,
@@ -37,7 +38,7 @@ module.exports = (env, argv) => {
           test: /\.worker\.(js|ts)$/,
           loader: 'worker-loader',
           options: {
-            name: IS_DEV ? '[name].js' : '[name].[hash].js',
+            name: 'workers/' + (IS_DEV ? '[name].js' : '[name].[hash].js'),
           },
         },
         {
