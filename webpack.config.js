@@ -23,9 +23,10 @@ module.exports = (env, argv) => {
     },
     devtool: IS_DEV ? 'source-map' : '',
     devServer: {
+      host: '0.0.0.0',
       contentBase: path.resolve(__dirname, 'dist'),
       watchContentBase: true,
-      port: 3000,
+      port: 4000,
       historyApiFallback: true
     },
     resolve: {
