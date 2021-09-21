@@ -9,7 +9,8 @@
     "declarationMap": false,
     "declarationDir": "./types",
     "composite": true,
-    "rootDir": "./"
+    "rootDir": "./",
+    "skipLibCheck": true
   },
   "files": [
     "@types/shader-shim.d.ts"
@@ -19,6 +20,7 @@
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "**/types/**"
   ]
 }

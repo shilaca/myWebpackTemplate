@@ -2,6 +2,13 @@
   "extends": "../generic-tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "lib": ["es5", "es6", "webworker"]
-  }
+    "lib": [
+      "es5",
+      "es6",
+      "webworker"
+    ]
+  },
+  "include": [
+    "**/service-worker/**/*.ts"
+  ]
 }

@@ -2,12 +2,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const Sass = require('sass')
-const Fiber = require('fibers')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = (env, argv) => {
@@ -16,16 +14,16 @@ module.exports = (env, argv) => {
     entry: './src/ts/index.ts',
     output: {
       filename: './scripts/main-[hash].js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
+      assetModuleFilename: 'assets/[hash][ext][query]'
     },
     optimization: {
-      minimizer: [new TerserPlugin({}), new OptimizeCssAssetsPlugin({})]
+      minimizer: [new TerserPlugin({}), new CssMinimizerPlugin({})]
     },
     devtool: IS_DEV ? 'source-map' : '',
     devServer: {
+      hot: true,
       host: '0.0.0.0',
-      contentBase: path.resolve(__dirname, 'dist'),
-      watchContentBase: true,
       port: 4000,
       historyApiFallback: true
     },
@@ -42,7 +40,7 @@ module.exports = (env, argv) => {
           test: /\.worker\.(js|ts)$/,
           loader: 'worker-loader',
           options: {
-            name: 'workers/' + (IS_DEV ? '[name].js' : '[name].[hash].js')
+            filename: 'workers/' + (IS_DEV ? '[name].js' : '[name].[hash].js')
           }
         },
         {
@@ -79,25 +77,19 @@ module.exports = (env, argv) => {
             {
               loader: 'sass-loader',
               options: {
-                implementation: Sass,
-                sassOptions: {
-                  fiber: Fiber
-                }
+                implementation: Sass
               }
             }
           ]
         },
         {
           test: /\.(glsl|vert|frag|vs|fs)$/,
-          use: ['raw-loader'],
+          type: 'asset/source',
           exclude: /node_modules/
         }
       ]
     },
     plugins: [
-      new CleanWebpackPlugin({
-        exclude: ['img']
-      }),
       new HtmlWebpackPlugin({
         template: './src/index.html'
       }),
