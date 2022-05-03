@@ -4,7 +4,11 @@
     "lib": ["es5", "es6", "dom"]
   },
   "references": [
-    { "path": "./dedicated-worker/tsconfig.json" },
-    { "path": "./service-worker/tsconfig.json" }
+    {
+      "path": "./dedicated-worker/tsconfig.json"
+    },
+    {
+      "path": "./service-worker/tsconfig.json"
+    }
   ]
 }

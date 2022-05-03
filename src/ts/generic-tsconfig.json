@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "removeComments": true,
@@ -12,15 +12,7 @@
     "rootDir": "./",
     "skipLibCheck": true
   },
-  "files": [
-    "@types/shader-shim.d.ts"
-  ],
-  "include": [
-    "../**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "**/types/**"
-  ]
+  "files": ["@types/shader-shim.d.ts"],
+  "include": ["../**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/types/**"]
 }

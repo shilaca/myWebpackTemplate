@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = (env, argv) => {
   const IS_DEV = argv.mode === 'development'
@@ -27,6 +26,9 @@ module.exports = (env, argv) => {
       port: 4000,
       historyApiFallback: true
     },
+    stats: {
+      children: true
+    },
     resolve: {
       extensions: ['.ts', '.js']
     },
@@ -35,13 +37,6 @@ module.exports = (env, argv) => {
         {
           test: /\.html$/,
           use: ['html-loader']
-        },
-        {
-          test: /\.worker\.(js|ts)$/,
-          loader: 'worker-loader',
-          options: {
-            filename: 'workers/' + (IS_DEV ? '[name].js' : '[name].[hash].js')
-          }
         },
         {
           test: /\.ts$/,
@@ -96,9 +91,6 @@ module.exports = (env, argv) => {
       new MiniCssExtractPlugin({
         filename: './css/style-[hash].css'
       })
-      // new CopyWebpackPlugin({
-      //   patterns: [{ from: './src/assets', to: './assets' }]
-      // })
     ]
   }
 }
